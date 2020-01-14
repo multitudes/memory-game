@@ -1,4 +1,3 @@
-
 import PlaygroundSupport
 import UIKit
 
@@ -41,8 +40,8 @@ class ViewController: UIViewController {
         }
     }
     private func updateFlipCountLabel(){
-        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)  ,
-            .strokeColor : #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)  , .font: UIFont.systemFont(ofSize: 24)]
+        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)  ,
+                                                          .strokeColor : #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)  , .font: UIFont.systemFont(ofSize: 24)]
         let attributedString = NSAttributedString(string: "flips : \(flipCount)", attributes: attributes)
         flipCountLabel.attributedText = attributedString
     }
@@ -50,7 +49,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Memory Game"
-
+        
     }
     override func loadView() {
         view = UIView()
@@ -59,10 +58,10 @@ class ViewController: UIViewController {
         titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        let attributes: [NSAttributedString.Key : Any] = [ .foregroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)  , .font: UIFont.systemFont(ofSize: 44) ]
+        let attributes: [NSAttributedString.Key : Any] = [ .foregroundColor: #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)  , .font: UIFont.systemFont(ofSize: 44) ]
         let attributedString = NSAttributedString(string: "Memory Game", attributes: attributes)
         titleLabel.attributedText = attributedString
-       
+        
         flipCountLabel = UILabel()
         flipCountLabel.translatesAutoresizingMaskIntoConstraints = false
         flipCountLabel.textAlignment = .center
@@ -70,11 +69,11 @@ class ViewController: UIViewController {
         updateFlipCountLabel()
         view.addSubview(titleLabel)
         view.addSubview(flipCountLabel)
-      
-       
+        
+        
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsView.backgroundColor = .red
+        buttonsView.backgroundColor = .white
         buttonsView.layer.masksToBounds = true
         buttonsView.layer.cornerRadius = 9
         view.addSubview(buttonsView)
@@ -84,13 +83,11 @@ class ViewController: UIViewController {
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             flipCountLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 10),
             flipCountLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0),
-            //card.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             buttonsView.widthAnchor.constraint(equalToConstant: 360),
             buttonsView.heightAnchor.constraint(equalToConstant: 480),
             buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //buttonsView.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 20),
             buttonsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -60)
-            ])
+        ])
         let width = 120
         let height = 120
         
@@ -100,7 +97,7 @@ class ViewController: UIViewController {
                 // create a new button and give it a big font size
                 let letterButton = UIButton(type: .roundedRect)
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 54)
-                letterButton.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                letterButton.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
                 letterButton.layer.cornerRadius = 8
                 
                 // calculate the frame of this button using its column and row
@@ -118,9 +115,9 @@ class ViewController: UIViewController {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1 , delay: 0, options: [], animations: {
             self.cardButtons.forEach {
                 $0.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
-                }
+            }
         }) { (position) in
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, options: [], animations: {
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, options: [], animations: {
                 self.cardButtons.forEach {
                     $0.transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
                 }
@@ -138,18 +135,18 @@ class ViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             } else {
                 button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 0) : #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 0) : #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
             }
         }
     }
-
+    
     private var faceUpViews: [Card] {
         return game.cards.filter { $0.isFaceUp }
     }
     
     private var emoji = [Card: String]()
     var emojiChoices = "🍪🐼🐯🐷🐸🐵🙈🙉🐒🦉🦄🐝🍉🍎🍌🥦🥑🛴🚀🚁🐋🍡🍮🍫🍯☕️"
-
+    
     private func emoji(for card: Card) -> String {
         if emoji[card] == nil, emojiChoices.count > 0 {
             let randomIndex = Int.random(in: 0 ..< emojiChoices.count)
@@ -184,7 +181,7 @@ class ViewController: UIViewController {
             print("chosen card not in ")
         }
     }
-
+    
     
     
     public func createEmojiEmitter(){
@@ -258,7 +255,7 @@ class ViewController: UIViewController {
             gameOverLabel.heightAnchor.constraint(equalToConstant: 200),
             gameOverLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             gameOverLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            ])
+        ])
         
         UIView.animate(withDuration: 2,
                        delay: 0,
@@ -271,7 +268,7 @@ class ViewController: UIViewController {
         })
         
     }
-
+    
 }
 
 let gameView = ViewController()
